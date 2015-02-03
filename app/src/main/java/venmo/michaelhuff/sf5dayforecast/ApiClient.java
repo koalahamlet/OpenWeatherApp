@@ -14,6 +14,7 @@ public class ApiClient {
     ApiService service;
 
     public ApiClient(){
+
     RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://api.openweathermap.org/data/2.5")
                 .setLogLevel(RestAdapter.LogLevel.FULL)

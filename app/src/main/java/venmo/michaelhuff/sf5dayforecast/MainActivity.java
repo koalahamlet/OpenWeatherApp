@@ -56,7 +56,6 @@ public class MainActivity extends ActionBarActivity {
                 Type listType = new TypeToken<ForcastResponseObject>() {
                     }.getType();
                 ForcastResponseObject TEST = new ForcastResponseObject();
-//                WeatherOverview weatherList = new WeatherOverview();
                 Gson gson = new GsonBuilder()
                         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                         .create();
@@ -74,6 +73,7 @@ public class MainActivity extends ActionBarActivity {
             }
 
         };
+
 
         apiClient.getForecast().subscribe(observer);
 
