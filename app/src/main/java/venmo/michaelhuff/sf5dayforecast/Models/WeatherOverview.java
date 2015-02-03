@@ -1,4 +1,4 @@
-package venmo.michaelhuff.sf5dayforecast;
+package venmo.michaelhuff.sf5dayforecast.Models;
 
 /**
  * Created by koalahamlet on 2/2/15.
