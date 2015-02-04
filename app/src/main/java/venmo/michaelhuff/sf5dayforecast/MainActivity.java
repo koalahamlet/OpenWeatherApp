@@ -17,8 +17,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -29,8 +27,8 @@ import venmo.michaelhuff.sf5dayforecast.Models.ForcastResponseObject;
 
 public class MainActivity extends ActionBarActivity {
 
-    @Inject
-    ApiClient apiClient;
+//    @Inject
+//    ApiClient apiClientz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +42,8 @@ public class MainActivity extends ActionBarActivity {
         // Perform injection so that when this call returns all dependencies will be available for use.
         ((WeatherApplication) getApplication()).component().inject(this);
 
+
+        ApiClient apiClient = new ApiClient();
         Observer<Response> observer = new Observer<Response>() {
             @Override public void onCompleted() {
 
