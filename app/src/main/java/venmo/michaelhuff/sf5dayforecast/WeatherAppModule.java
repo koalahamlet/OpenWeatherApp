@@ -28,8 +28,8 @@ public class WeatherAppModule {
         return restAdapter.create(ApiService.class);
     }
 
-//    @Provides @Singleton ApiClient provideApiClient() {
-//        return new ApiClient();
-//    }
+    @Provides @Singleton ApiClient provideApiClient(ApiService apiService) {
+        return new ApiClient(apiService);
+    }
 
 }

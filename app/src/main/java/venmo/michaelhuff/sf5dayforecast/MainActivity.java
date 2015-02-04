@@ -29,11 +29,8 @@ import venmo.michaelhuff.sf5dayforecast.Models.ForcastResponseObject;
 
 public class MainActivity extends ActionBarActivity {
 
-//    @Inject
-//    ApiClient apiClient;
-
     @Inject
-    ApiService apiService;
+    ApiClient apiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +45,6 @@ public class MainActivity extends ActionBarActivity {
         ((WeatherApplication) getApplication()).component().inject(this);
 
 
-        ApiClient apiClient = new ApiClient(apiService);
         Observer<Response> observer = new Observer<Response>() {
             @Override public void onCompleted() {
 
