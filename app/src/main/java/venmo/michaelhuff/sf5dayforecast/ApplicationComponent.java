@@ -16,5 +16,6 @@ interface ApplicationComponent {
 
     void inject(WeatherApplication weatherApplication);
     void inject(MainActivity mainActivity);
+//    void inject(ApiClient apiClient);
 }
 

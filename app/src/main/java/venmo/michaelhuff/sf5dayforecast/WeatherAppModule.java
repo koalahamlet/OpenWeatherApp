@@ -24,9 +24,12 @@ public class WeatherAppModule {
                 .setLogLevel(RestAdapter.LogLevel.FULL).build();
     }
 
-
     @Provides @Singleton ApiService provideApiService(RestAdapter restAdapter) {
         return restAdapter.create(ApiService.class);
     }
+
+//    @Provides @Singleton ApiClient provideApiClient() {
+//        return new ApiClient();
+//    }
 
 }
