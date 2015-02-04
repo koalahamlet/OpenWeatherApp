@@ -1,5 +1,7 @@
 package venmo.michaelhuff.sf5dayforecast;
 
+import com.squareup.picasso.Picasso;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -31,5 +33,10 @@ public class WeatherAppModule {
     @Provides @Singleton ApiClient provideApiClient(ApiService apiService) {
         return new ApiClient(apiService);
     }
+
+    @Provides @Singleton Picasso providePicasso() {
+        return new Picasso.Builder(application.getBaseContext()).build();
+    }
+
 
 }

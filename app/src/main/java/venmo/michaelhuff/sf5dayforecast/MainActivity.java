@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import java.lang.reflect.Type;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
@@ -31,6 +33,9 @@ public class MainActivity extends ActionBarActivity {
 
     @Inject
     ApiClient apiClient;
+
+    @InjectView(R.id.listview)
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

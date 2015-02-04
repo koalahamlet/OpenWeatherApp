@@ -2,9 +2,6 @@ package venmo.michaelhuff.sf5dayforecast;
 
 import android.app.Application;
 
-/**
- * Created by koalahamlet on 2/3/15.
- */
 public class WeatherApplication extends Application {
 
     private ApplicationComponent component;

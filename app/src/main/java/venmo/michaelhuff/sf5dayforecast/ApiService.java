@@ -8,7 +8,7 @@ import rx.Observable;
  * Created by koalahamlet on 1/31/15.
  */
 public interface ApiService {
-    //http://api.openweathermap.org/data/2.5/forecast?id=5391959 // san francisco
+    //http://api.openweathermap.org/data/2.5/forecast/daily?id=5391959&units=imperial&cnt=5 //san francisco
 
     @GET("/forecast/daily?id=5391959&units=imperial&cnt=5")
     Observable<Response> getSF5DayForecast();
