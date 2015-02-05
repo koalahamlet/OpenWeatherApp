@@ -104,6 +104,10 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
 
+                //Set the adapter
+                ForecastAdapter adapter = new ForecastAdapter(getApplication().getApplicationContext(), forecast);
+                listView.setAdapter(adapter);
+
             }
 
         };
