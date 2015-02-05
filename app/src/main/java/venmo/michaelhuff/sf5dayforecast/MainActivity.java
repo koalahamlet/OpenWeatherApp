@@ -25,6 +25,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import dagger.ObjectGraph;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
@@ -41,6 +42,9 @@ public class MainActivity extends ActionBarActivity {
     @InjectView(R.id.listview)
     ListView listView;
 
+    ObjectGraph objectGraph;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +55,10 @@ public class MainActivity extends ActionBarActivity {
 
         // after the butterknife, comes the dagger
         // Perform injection so that when this call returns all dependencies will be available for use.
-        ((WeatherApplication) getApplication()).component().inject(this);
+//        ((WeatherApplication) getApplication()).component().inject(this);
 
+        WeatherApplication app = WeatherApplication.get(this);
+        app.inject(this);
 
         Observer<Response> observer = new Observer<Response>() {
             @Override public void onCompleted() {

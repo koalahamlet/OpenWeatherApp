@@ -1,39 +1,37 @@
 package venmo.michaelhuff.sf5dayforecast;
 
+import android.app.Application;
+
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit.RestAdapter;
 
 /**
  * Created by koalahamlet on 2/3/15.
  */
-@Module
+@Module(
+        includes = {
+                NetworkModule.class
+        },
+        injects = {
+                MainActivity.class,
+                WeatherApplication.class
+        },
+        library = true
+)
 public class WeatherAppModule {
 
-    @Module(injects = {MainActivity.class})
+    private final Application application;
 
-    private final WeatherApplication application;
-
-    public WeatherAppModule(WeatherApplication application) {
+    public WeatherAppModule(Application application) {
         this.application = application;
     }
 
-    @Provides @Singleton RestAdapter provideRestAdapter() {
-        return new RestAdapter.Builder()
-                .setEndpoint("http://api.openweathermap.org/data/2.5")
-                .setLogLevel(RestAdapter.LogLevel.FULL).build();
-    }
-
-    @Provides @Singleton ApiService provideApiService(RestAdapter restAdapter) {
-        return restAdapter.create(ApiService.class);
-    }
-
-    @Provides @Singleton ApiClient provideApiClient(ApiService apiService) {
-        return new ApiClient(apiService);
+    @Provides @Singleton public Application provideApplication() {
+        return application;
     }
 
     @Provides @Singleton Picasso providePicasso() {
