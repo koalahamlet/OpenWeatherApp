@@ -36,6 +36,13 @@ public class WeatherAppModule {
 
     @Provides @Singleton Picasso providePicasso() {
         return new Picasso.Builder(application.getBaseContext()).build();
+
+//        providePicasso(OkHttpClient okHttpClient) {
+//            Picasso picasso =
+//                    new Picasso.Builder(Archer.getInstance()).downloader(new OkHttpDownloader(okHttpClient))
+//                            .build();
+//            return picasso;
+        }
     }
 
 
