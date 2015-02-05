@@ -10,6 +10,11 @@ public class WeatherOverview {
             Float pressure;// 1026.24,
             Integer humidity;
             WeatherConditions[] weather; // array then object
+            String date;
+
+    public String getDate() { return date; }
+
+    public void setDate(String date) { this.date = date; }
 
     public Temprature getTemp() {
         return temp;
@@ -35,8 +40,8 @@ public class WeatherOverview {
         this.humidity = humidity;
     }
 
-    public WeatherConditions[] getWeather() {
-        return weather;
+    public WeatherConditions getWeather() {
+        return weather[0];
     }
 
     public void setWeather(WeatherConditions[] weather) {

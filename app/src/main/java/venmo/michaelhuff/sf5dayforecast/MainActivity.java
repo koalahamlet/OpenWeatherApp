@@ -17,6 +17,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
@@ -27,6 +30,7 @@ import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
 import rx.Observer;
 import venmo.michaelhuff.sf5dayforecast.Models.ForcastResponseObject;
+import venmo.michaelhuff.sf5dayforecast.Models.WeatherOverview;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -69,7 +73,8 @@ public class MainActivity extends ActionBarActivity {
                 int status = response.getStatus();
                 Type listType = new TypeToken<ForcastResponseObject>() {
                     }.getType();
-                ForcastResponseObject TEST = new ForcastResponseObject();
+                ForcastResponseObject TEST;
+                ArrayList<WeatherOverview> forecast = new ArrayList<WeatherOverview>();
                 Gson gson = new GsonBuilder()
                         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                         .create();
@@ -77,6 +82,7 @@ public class MainActivity extends ActionBarActivity {
                 GsonConverter gsonConverter = new GsonConverter(gson);
                 try{
                     TEST = (ForcastResponseObject) gsonConverter.fromBody(response.getBody(), listType);
+                    forecast = (ArrayList) TEST.getList();
                     Log.d("onNext", TEST.toString());
                 } catch (Exception e) {
                         onError(e);
@@ -84,10 +90,23 @@ public class MainActivity extends ActionBarActivity {
                         Log.e("onNext", e.toString());
                         Log.e("onNext", e.getMessage());
                 }
+
+                if (forecast!=null) {
+                    // if call was not null
+                    // get a calendar instance
+                    Calendar cal = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy");
+                    for (int i = 0; i<forecast.size(); i++){
+                        // then add the current date as a string to the array.
+                        forecast.get(i).setDate(sdf.format(cal.getTime()));
+                        //increment by one for the next time
+                        cal.add(Calendar.DATE, 1);
+                    }
+                }
+
             }
 
         };
-
 
         apiClient.getForecast().subscribe(observer);
 
