@@ -55,8 +55,6 @@ public class MainActivity extends ActionBarActivity {
 
         // after the butterknife, comes the dagger
         // Perform injection so that when this call returns all dependencies will be available for use.
-//        ((WeatherApplication) getApplication()).component().inject(this);
-
         WeatherApplication app = WeatherApplication.get(this);
         app.inject(this);
 
@@ -79,7 +77,7 @@ public class MainActivity extends ActionBarActivity {
                 int status = response.getStatus();
                 Type listType = new TypeToken<ForcastResponseObject>() {
                     }.getType();
-                ForcastResponseObject TEST;
+                ForcastResponseObject responseObject;
                 ArrayList<WeatherOverview> forecast = new ArrayList<WeatherOverview>();
                 Gson gson = new GsonBuilder()
                         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -87,9 +85,9 @@ public class MainActivity extends ActionBarActivity {
 
                 GsonConverter gsonConverter = new GsonConverter(gson);
                 try{
-                    TEST = (ForcastResponseObject) gsonConverter.fromBody(response.getBody(), listType);
-                    forecast = (ArrayList) TEST.getList();
-                    Log.d("onNext", TEST.toString());
+                    responseObject = (ForcastResponseObject) gsonConverter.fromBody(response.getBody(), listType);
+                    forecast = (ArrayList) responseObject.getList();
+                    Log.d("onNext", responseObject.toString());
                 } catch (Exception e) {
                         onError(e);
                         e.printStackTrace();

@@ -24,7 +24,7 @@ public class WeatherApplication extends Application {
     }
 
     private List<Object> getModules() {
-        return Arrays.<Object>asList(new WeatherAppModule(this), new NetworkModule());
+        return Arrays.<Object>asList(new WeatherAppModule(this));
     }
 
     public static WeatherApplication get(Context context) {
