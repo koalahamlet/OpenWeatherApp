@@ -14,6 +14,8 @@ import retrofit.RestAdapter;
 @Module
 public class WeatherAppModule {
 
+    @Module(injects = {MainActivity.class})
+
     private final WeatherApplication application;
 
     public WeatherAppModule(WeatherApplication application) {

@@ -2,19 +2,31 @@ package venmo.michaelhuff.sf5dayforecast;
 
 import android.app.Application;
 
+import java.util.Arrays;
+import java.util.List;
+
+import dagger.ObjectGraph;
+
 public class WeatherApplication extends Application {
 
-    private ApplicationComponent component;
+//    private ApplicationComponent component; // kill this with fire
+    private ObjectGraph objectGraph;
 
     @Override public void onCreate() {
         super.onCreate();
-         component = Dagger_ApplicationComponent.builder()
-                 .weatherAppModule(new WeatherAppModule(this))
-                .build();
-        component().inject(this); // As of now, things should be should be injected into this.
+        objectGraph = ObjectGraph.create(getModules().toArray());
+        objectGraph.inject(this);
+
+
     }
 
-    public ApplicationComponent component() {
-        return component;
+
+    private List<Object> getModules() {
+        return Arrays.<Object>asList(new WeatherAppModule(this));
     }
+
+    public ObjectGraph createScopedGraph(Object... modules) {
+        return objectGraph.plus(modules);
+    }
+
 }
