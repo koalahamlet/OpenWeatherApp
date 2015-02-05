@@ -2,6 +2,8 @@ package venmo.michaelhuff.sf5dayforecast;
 
 import android.app.Application;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
@@ -18,13 +20,14 @@ import dagger.Provides;
         },
         injects = {
                 MainActivity.class,
-                WeatherApplication.class
+                WeatherApplication.class,
+                ForecastAdapter.class
         },
         library = true
 )
 public class WeatherAppModule {
 
-    private final Application application;
+    private  final Application application;
 
     public WeatherAppModule(Application application) {
         this.application = application;
@@ -34,16 +37,13 @@ public class WeatherAppModule {
         return application;
     }
 
-    @Provides @Singleton Picasso providePicasso() {
-        return new Picasso.Builder(application.getBaseContext()).build();
-
-//        providePicasso(OkHttpClient okHttpClient) {
-//            Picasso picasso =
-//                    new Picasso.Builder(Archer.getInstance()).downloader(new OkHttpDownloader(okHttpClient))
-//                            .build();
-//            return picasso;
-//        }
+    @Provides @Singleton
+    Picasso providePicasso(OkHttpClient okHttpClient) {
+        return new Picasso.Builder(application).downloader(new OkHttpDownloader(okHttpClient)).build();
     }
 
+    public Application getInstance(){
+        return application;
+    }
 
 }

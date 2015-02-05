@@ -8,7 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -17,6 +21,9 @@ import venmo.michaelhuff.sf5dayforecast.Models.WeatherConditions;
 import venmo.michaelhuff.sf5dayforecast.Models.WeatherOverview;
 
 public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
+
+    @Inject
+    Picasso picasso;
 
     public static class ViewHolder {
         @InjectView(R.id.tv_detail) TextView tvDetail;
@@ -35,6 +42,8 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
 
     public ForecastAdapter(Context context, ArrayList<WeatherOverview> forecast) {
         super(context, R.layout.forecast_item, forecast);
+        WeatherApplication app = WeatherApplication.get(context);
+        app.inject(this);
     }
 
     @Override
@@ -44,6 +53,8 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
         WeatherOverview weatherOverview = getItem(position);
         WeatherConditions conditions = weatherOverview.getWeather();
         Temprature temp = weatherOverview.getTemp();
+
+
 
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder;
@@ -64,6 +75,11 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
         viewHolder.tvHigh.setText(String.valueOf(temp.getMax()));
         viewHolder.tvLow.setText(String.valueOf(temp.getMin()));
         viewHolder.tvHumid.setText(String.valueOf(weatherOverview.getHumidity()));
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("http://openweathermap.org/img/w/").append(conditions.getIcon()).append(".png");
+        picasso.with(this.getContext()).load(sb.toString()).into(viewHolder.ivWeatherIcon);
 
         // Return the completed view to render on screen
         return convertView;

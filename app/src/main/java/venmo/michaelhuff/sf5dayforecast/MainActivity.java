@@ -25,7 +25,6 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import dagger.ObjectGraph;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
@@ -41,9 +40,6 @@ public class MainActivity extends ActionBarActivity {
 
     @InjectView(R.id.listview)
     ListView listView;
-
-    ObjectGraph objectGraph;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
