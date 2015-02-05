@@ -42,7 +42,7 @@ public class WeatherAppModule {
 //                    new Picasso.Builder(Archer.getInstance()).downloader(new OkHttpDownloader(okHttpClient))
 //                            .build();
 //            return picasso;
-        }
+//        }
     }
 
 
