@@ -98,7 +98,7 @@ public class MainActivity extends ActionBarActivity {
                     // if call was not null
                     // get a calendar instance
                     Calendar cal = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE MMM dd,yyyy");
                     for (int i = 0; i < forecast.size(); i++) {
                         // then add the current date as a string to the array.
                         forecast.get(i).setDate(sdf.format(cal.getTime()));

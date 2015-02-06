@@ -30,6 +30,8 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
         TextView tvDetail;
         @InjectView(R.id.tv_main)
         TextView tvMain;
+        @InjectView(R.id.tv_avg)
+        TextView tvAvg;
         @InjectView(R.id.tv_high)
         TextView tvHigh;
         @InjectView(R.id.tv_low)
@@ -78,6 +80,7 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
         viewHolder.tvDate.setText(weatherOverview.getDate());
         viewHolder.tvMain.setText(conditions.getMain());
         viewHolder.tvDetail.setText(conditions.getDescription());
+        viewHolder.tvAvg.setText(String.valueOf(temp.getDay())+ "˚F");
         viewHolder.tvHigh.setText(String.valueOf(temp.getMax()) + "˚F");
         viewHolder.tvLow.setText(String.valueOf(temp.getMin()) + "˚F");
         viewHolder.tvHumid.setText(String.valueOf(weatherOverview.getHumidity()) + "%");
