@@ -92,5 +92,4 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
         return convertView;
     }
 
-
 }

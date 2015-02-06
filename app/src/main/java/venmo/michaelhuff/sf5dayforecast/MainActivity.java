@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
         // might not need setContentView
         setContentView(R.layout.fragment_main);
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             //TODO: do fragment transaction
             // to inflate fragment_main
             // with getSupportFragmentManager

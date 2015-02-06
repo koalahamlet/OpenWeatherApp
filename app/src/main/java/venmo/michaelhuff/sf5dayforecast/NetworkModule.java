@@ -9,12 +9,11 @@ import dagger.Provides;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 
-/**
- * Created by koalahamlet on 2/4/15.
- */
 @Module(complete = false, library = true)
 public class NetworkModule {
-    @Provides @Singleton RestAdapter provideRestAdapter() {
+    @Provides
+    @Singleton
+    RestAdapter provideRestAdapter() {
         OkClient okClient = new OkClient();
         return new RestAdapter.Builder()
                 .setClient(okClient)
@@ -22,15 +21,20 @@ public class NetworkModule {
                 .setLogLevel(RestAdapter.LogLevel.FULL).build();
     }
 
-    @Provides @Singleton ApiService provideApiService(RestAdapter restAdapter) {
+    @Provides
+    @Singleton
+    ApiService provideApiService(RestAdapter restAdapter) {
         return restAdapter.create(ApiService.class);
     }
 
-    @Provides @Singleton ApiClient provideApiClient(ApiService apiService) {
+    @Provides
+    @Singleton
+    ApiClient provideApiClient(ApiService apiService) {
         return new ApiClient(apiService);
     }
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     OkHttpClient okHttpClient() {
         return new OkHttpClient();
     }

@@ -11,9 +11,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by koalahamlet on 2/3/15.
- */
 @Module(
         includes = {
                 NetworkModule.class
@@ -28,22 +25,25 @@ import dagger.Provides;
 )
 public class WeatherAppModule {
 
-    private  final Application application;
+    private final Application application;
 
     public WeatherAppModule(Application application) {
         this.application = application;
     }
 
-    @Provides @Singleton public Application provideApplication() {
+    @Provides
+    @Singleton
+    public Application provideApplication() {
         return application;
     }
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     Picasso providePicasso(OkHttpClient okHttpClient) {
         return new Picasso.Builder(application).downloader(new OkHttpDownloader(okHttpClient)).build();
     }
 
-    public Application getInstance(){
+    public Application getInstance() {
         return application;
     }
 

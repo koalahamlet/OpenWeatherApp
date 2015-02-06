@@ -1,8 +1,5 @@
 package venmo.michaelhuff.sf5dayforecast.Models;
 
-/**
- * Created by koalahamlet on 2/2/15.
- */
 public class WeatherConditions {
 
     String main;

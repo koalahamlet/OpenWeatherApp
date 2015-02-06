@@ -1,9 +1,10 @@
 package venmo.michaelhuff.sf5dayforecast.Models;
 
-/**
- * Created by koalahamlet on 2/2/15.
- */
 public class Temprature {
+
+    Float day;
+    Float min;
+    Float max;
 
     public Float getDay() {
         return day;
@@ -28,11 +29,6 @@ public class Temprature {
     public void setMax(Float max) {
         this.max = max;
     }
-
-    Float day;
-    Float min;
-    Float max;
-
 
 
 }

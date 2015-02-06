@@ -10,10 +10,14 @@ import dagger.ObjectGraph;
 
 public class WeatherApplication extends Application {
 
-//    private ApplicationComponent component; // kill this with fire
     private ObjectGraph objectGraph;
 
-    @Override public void onCreate() {
+    public static WeatherApplication get(Context context) {
+        return (WeatherApplication) context.getApplicationContext();
+    }
+
+    @Override
+    public void onCreate() {
         super.onCreate();
         objectGraph = ObjectGraph.create(getModules().toArray());
         objectGraph.inject(this);
@@ -26,14 +30,5 @@ public class WeatherApplication extends Application {
     private List<Object> getModules() {
         return Arrays.<Object>asList(new WeatherAppModule(this));
     }
-
-    public static WeatherApplication get(Context context) {
-        return (WeatherApplication) context.getApplicationContext();
-    }
-
-    // fb dagger example
-//    public ObjectGraph createScopedGraph(Object... modules) {
-//        return objectGraph.plus(modules);
-//    }
 
 }

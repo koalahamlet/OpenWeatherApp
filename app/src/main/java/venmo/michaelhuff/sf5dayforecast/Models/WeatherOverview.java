@@ -1,20 +1,21 @@
 package venmo.michaelhuff.sf5dayforecast.Models;
 
-/**
- * Created by koalahamlet on 2/2/15.
- */
 public class WeatherOverview {
 
 
-            Temprature temp; // just object
-            Float pressure;// 1026.24,
-            Integer humidity;
-            WeatherConditions[] weather; // array then object
-            String date;
+    Temprature temp; // just object
+    Float pressure;// 1026.24,
+    Integer humidity;
+    WeatherConditions[] weather; // array then object
+    String date;
 
-    public String getDate() { return date; }
+    public String getDate() {
+        return date;
+    }
 
-    public void setDate(String date) { this.date = date; }
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public Temprature getTemp() {
         return temp;
