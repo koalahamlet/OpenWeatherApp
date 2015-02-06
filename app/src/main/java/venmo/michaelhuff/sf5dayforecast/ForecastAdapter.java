@@ -72,9 +72,9 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
         viewHolder.tvDate.setText(weatherOverview.getDate());
         viewHolder.tvMain.setText(conditions.getMain());
         viewHolder.tvDetail.setText(conditions.getDescription());
-        viewHolder.tvHigh.setText(String.valueOf(temp.getMax()));
-        viewHolder.tvLow.setText(String.valueOf(temp.getMin()));
-        viewHolder.tvHumid.setText(String.valueOf(weatherOverview.getHumidity()));
+        viewHolder.tvHigh.setText(String.valueOf(temp.getMax()) +"˚F");
+        viewHolder.tvLow.setText(String.valueOf(temp.getMin()) +"˚F");
+        viewHolder.tvHumid.setText(String.valueOf(weatherOverview.getHumidity())+ "%");
 
         StringBuilder sb = new StringBuilder();
 
