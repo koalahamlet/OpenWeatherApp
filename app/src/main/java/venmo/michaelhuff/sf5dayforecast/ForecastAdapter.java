@@ -26,13 +26,20 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
     Picasso picasso;
 
     public static class ViewHolder {
-        @InjectView(R.id.tv_detail) TextView tvDetail;
-        @InjectView(R.id.tv_main) TextView tvMain;
-        @InjectView(R.id.tv_high) TextView tvHigh;
-        @InjectView(R.id.tv_low) TextView tvLow;
-        @InjectView(R.id.tv_humid) TextView tvHumid;
-        @InjectView(R.id.tv_date) TextView tvDate;
-        @InjectView(R.id.image) ImageView ivWeatherIcon;
+        @InjectView(R.id.tv_detail)
+        TextView tvDetail;
+        @InjectView(R.id.tv_main)
+        TextView tvMain;
+        @InjectView(R.id.tv_high)
+        TextView tvHigh;
+        @InjectView(R.id.tv_low)
+        TextView tvLow;
+        @InjectView(R.id.tv_humid)
+        TextView tvHumid;
+        @InjectView(R.id.tv_date)
+        TextView tvDate;
+        @InjectView(R.id.image)
+        ImageView ivWeatherIcon;
 
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);
@@ -55,7 +62,6 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
         Temprature temp = weatherOverview.getTemp();
 
 
-
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder;
 
@@ -72,17 +78,19 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
         viewHolder.tvDate.setText(weatherOverview.getDate());
         viewHolder.tvMain.setText(conditions.getMain());
         viewHolder.tvDetail.setText(conditions.getDescription());
-        viewHolder.tvHigh.setText(String.valueOf(temp.getMax()) +"˚F");
-        viewHolder.tvLow.setText(String.valueOf(temp.getMin()) +"˚F");
-        viewHolder.tvHumid.setText(String.valueOf(weatherOverview.getHumidity())+ "%");
+        viewHolder.tvHigh.setText(String.valueOf(temp.getMax()) + "˚F");
+        viewHolder.tvLow.setText(String.valueOf(temp.getMin()) + "˚F");
+        viewHolder.tvHumid.setText(String.valueOf(weatherOverview.getHumidity()) + "%");
 
         StringBuilder sb = new StringBuilder();
 
         sb.append("http://openweathermap.org/img/w/").append(conditions.getIcon()).append(".png");
-        picasso.with(this.getContext()).load(sb.toString()).into(viewHolder.ivWeatherIcon);
+        picasso.with(this.getContext()).load(sb.toString()).fit().centerCrop()
+                .into(viewHolder.ivWeatherIcon);
 
         // Return the completed view to render on screen
         return convertView;
     }
+
 
 }

@@ -21,7 +21,8 @@ import dagger.Provides;
         injects = {
                 MainActivity.class,
                 WeatherApplication.class,
-                ForecastAdapter.class
+                ForecastAdapter.class,
+                BlankFragment.class
         },
         library = true
 )

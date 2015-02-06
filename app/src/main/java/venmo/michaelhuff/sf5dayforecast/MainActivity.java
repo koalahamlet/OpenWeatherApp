@@ -1,22 +1,16 @@
 package venmo.michaelhuff.sf5dayforecast;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,6 +29,8 @@ import venmo.michaelhuff.sf5dayforecast.Models.WeatherOverview;
 
 public class MainActivity extends ActionBarActivity {
 
+    public String TAG = MainActivity.class.getSimpleName();
+
     @Inject
     ApiClient apiClient;
 
@@ -44,7 +40,14 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // might not need setContentView
         setContentView(R.layout.fragment_main);
+
+        if (savedInstanceState == null){
+            //TODO: do fragment transaction
+            // to inflate fragment_main
+            // with getSupportFragmentManager
+        }
 
         //you have to butter your bread
         ButterKnife.inject(this);
@@ -55,12 +58,14 @@ public class MainActivity extends ActionBarActivity {
         app.inject(this);
 
         Observer<Response> observer = new Observer<Response>() {
-            @Override public void onCompleted() {
+            @Override
+            public void onCompleted() {
 
             }
 
-            @Override public void onError(Throwable e) {
-                e.printStackTrace();
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, e.toString());
                 if (e instanceof RetrofitError) {
                     RetrofitError error = (RetrofitError) e;
                     if (error.getResponse().getStatus() == 401) {
@@ -69,10 +74,9 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
 
-            @Override public void onNext(Response response) {
+            @Override
+            public void onNext(Response response) {
                 int status = response.getStatus();
-                Type listType = new TypeToken<ForcastResponseObject>() {
-                    }.getType();
                 ForcastResponseObject responseObject;
                 ArrayList<WeatherOverview> forecast = new ArrayList<WeatherOverview>();
                 Gson gson = new GsonBuilder()
@@ -80,23 +84,22 @@ public class MainActivity extends ActionBarActivity {
                         .create();
 
                 GsonConverter gsonConverter = new GsonConverter(gson);
-                try{
-                    responseObject = (ForcastResponseObject) gsonConverter.fromBody(response.getBody(), listType);
+                try {
+                    responseObject = (ForcastResponseObject) gsonConverter.fromBody(response.getBody(), ForcastResponseObject.class);
                     forecast = (ArrayList) responseObject.getList();
                     Log.d("onNext", responseObject.toString());
                 } catch (Exception e) {
-                        onError(e);
-                        e.printStackTrace();
-                        Log.e("onNext", e.toString());
-                        Log.e("onNext", e.getMessage());
+                    onError(e);
+                    Log.e("onNext", e.toString());
+                    Log.e("onNext", e.getMessage());
                 }
 
-                if (forecast!=null) {
+                if (forecast != null) {
                     // if call was not null
                     // get a calendar instance
                     Calendar cal = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy");
-                    for (int i = 0; i<forecast.size(); i++){
+                    for (int i = 0; i < forecast.size(); i++) {
                         // then add the current date as a string to the array.
                         forecast.get(i).setDate(sdf.format(cal.getTime()));
                         //increment by one for the next time
@@ -139,19 +142,4 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-    }
 }
