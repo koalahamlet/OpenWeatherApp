@@ -1,130 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/weather_item_background">
 
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/image"
-        android:text="Date in italics"
-        android:textColor="#000000" />
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/ic_launcher" />
-
-    <TextView
-        android:id="@+id/tv_high"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="high temp in red"
-        android:textColor="@android:color/holo_red_light" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="High: "
-        android:id="@+id/tv_hi"
-        android:textColor="@android:color/holo_red_light"
-        android:layout_above="@+id/tv_low"
-        android:layout_toLeftOf="@+id/tv_high"
-        android:layout_toStartOf="@+id/tv_high" />
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:text="Date in italics"
+        android:textColor="#ffeae2e6"
+        android:textSize="19sp"
+        android:textStyle="italic" />
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/ll_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Low: "
-        android:id="@+id/tv_lo"
-        android:textColor="@android:color/holo_blue_bright"
-        android:layout_below="@+id/tv_high"
-        android:layout_toLeftOf="@+id/tv_high"
-        android:layout_toStartOf="@+id/tv_high" />
-    <TextView
-        android:id="@+id/tv_low"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tv_high"
-        android:layout_alignStart="@+id/tv_high"
-        android:layout_below="@+id/tv_high"
-        android:text="low temp in blue"
-        android:textColor="@android:color/holo_blue_bright" />
+        android:layout_below="@+id/tv_avg"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_humid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_low"
-        android:text="50%"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/holo_purple" />
-    <TextView
-        android:id="@+id/tv_h"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/iv_high"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/tv_high"
+            android:baselineAlignBottom="true"
+            android:src="@drawable/up_arrow" />
+
+        <TextView
+            android:id="@+id/tv_high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="high temp"
+            android:textColor="@android:color/holo_red_light" />
 
 
-        android:text="humidity: "
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/holo_purple"
-        android:layout_below="@+id/tv_low"
-        android:layout_toLeftOf="@+id/tv_humid"
-        android:layout_toStartOf="@+id/tv_humid" />
+        <ImageView
+            android:id="@+id/iv_low"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="8dp"
+            android:baselineAlignBottom="true"
+            android:src="@drawable/down_arrow" />
+
+        <TextView
+            android:id="@+id/tv_low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="low temp"
+            android:textColor="#ff007cff" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/ll_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffeae2e6"
+            android:text="humidity: "
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/tv_humid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="50%"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffeae2e6" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_avg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:text="67F"
-        android:textSize="35sp"
-        android:textColor="#ff000000"
-        android:layout_alignBaseline="@+id/tv_h"
-        android:layout_alignBottom="@+id/tv_h"
-        android:layout_toRightOf="@+id/image"
-
-        />
+        android:layout_marginLeft="8dp"
+        android:text="67"
+        android:textColor="#ffeae2e6"
+        android:textSize="45sp" />
 
     <TextView
-        android:id="@+id/tv_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tv_date"
-        android:layout_marginTop="23dp"
-        android:text="Main Description"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#ff000000" />
+        android:layout_alignBaseline="@+id/tv_avg"
+        android:layout_toRightOf="@+id/tv_avg"
+        android:text="˚F"
+        android:textColor="#ffeae2e6"
+        android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/tv_detail"
+    <!--<TextView-->
+    <!--android:id="@+id/tv_detail"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_below="@+id/tv_main"-->
+    <!--android:text="expansive description"-->
+    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+    <!--android:textColor="#ffeae2e6" />-->
+
+    <LinearLayout
+        android:layout_marginTop="85dp"
+        android:id="@+id/ll_conditions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tv_main"
-        android:text="expansive description"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000000" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_below="@+id/tv_lo"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/tv_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginRight="17dp"
+            android:text="Main Description"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffeae2e6" />
 
-
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_launcher" />
+    </LinearLayout>
 </RelativeLayout>

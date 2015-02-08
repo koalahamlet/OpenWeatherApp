@@ -17,7 +17,7 @@ import android.view.ViewGroup;
  * Use the {@link BlankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment extends Fragment {
+public class BlankFragment extends android.support.v4.app.Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,7 +64,76 @@ public class BlankFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+        return inflater.inflate(R.layout.fragment_main, container, false);
+//
+//        //you have to butter your bread
+//        ButterKnife.inject(this);
+//
+//        // after the butterknife, comes the dagger
+//        // Perform injection so that when this call returns all dependencies will be available for use.
+//        WeatherApplication app = WeatherApplication.get(this);
+//        app.inject(this);
+//
+//        Observer<Response> observer = new Observer<Response>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                Log.e(TAG, e.toString());
+//                if (e instanceof RetrofitError) {
+//                    RetrofitError error = (RetrofitError) e;
+//                    if (error.getResponse().getStatus() == 401) {
+//                        // something to handle a 401
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onNext(Response response) {
+//                int status = response.getStatus();
+//                ForcastResponseObject responseObject;
+//                ArrayList<WeatherOverview> forecast = new ArrayList<WeatherOverview>();
+//                Gson gson = new GsonBuilder()
+//                        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+//                        .create();
+//
+//                GsonConverter gsonConverter = new GsonConverter(gson);
+//                try {
+//                    responseObject = (ForcastResponseObject) gsonConverter.fromBody(response.getBody(), ForcastResponseObject.class);
+//                    forecast = (ArrayList) responseObject.getList();
+//                    Log.d("onNext", responseObject.toString());
+//                } catch (Exception e) {
+//                    onError(e);
+//                    Log.e("onNext", e.toString());
+//                    Log.e("onNext", e.getMessage());
+//                }
+//
+//                if (forecast != null) {
+//                    // if call was not null
+//                    // get a calendar instance
+//                    Calendar cal = Calendar.getInstance();
+//                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE MMM dd,yyyy");
+//                    for (int i = 0; i < forecast.size(); i++) {
+//                        // then add the current date as a string to the array.
+//                        forecast.get(i).setDate(sdf.format(cal.getTime()));
+//                        //increment by one for the next time
+//                        cal.add(Calendar.DATE, 1);
+//                    }
+//                }
+//
+//                //Set the adapter
+//                ForecastAdapter adapter = new ForecastAdapter(getApplication().getApplicationContext(), forecast);
+//                listView.setAdapter(adapter);
+//
+//            }
+//
+//        };
+//
+//        apiClient.getForecast().subscribe(observer);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

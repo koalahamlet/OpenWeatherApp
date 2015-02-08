@@ -26,8 +26,8 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
     Picasso picasso;
 
     public static class ViewHolder {
-        @InjectView(R.id.tv_detail)
-        TextView tvDetail;
+//        @InjectView(R.id.tv_detail)
+//        TextView tvDetail;
         @InjectView(R.id.tv_main)
         TextView tvMain;
         @InjectView(R.id.tv_avg)
@@ -77,12 +77,17 @@ public class ForecastAdapter extends ArrayAdapter<WeatherOverview> {
         }
 
         // Populate the data into the template view using the data object
+
+
+
         viewHolder.tvDate.setText(weatherOverview.getDate());
+        // taking out Main text for now as Main and Description
+        // reports are often redundant and clutter UI
         viewHolder.tvMain.setText(conditions.getMain());
-        viewHolder.tvDetail.setText(conditions.getDescription());
-        viewHolder.tvAvg.setText(String.valueOf(temp.getDay())+ "˚F");
-        viewHolder.tvHigh.setText(String.valueOf(temp.getMax()) + "˚F");
-        viewHolder.tvLow.setText(String.valueOf(temp.getMin()) + "˚F");
+//        viewHolder.tvDetail.setText(conditions.getDescription());
+        viewHolder.tvAvg.setText(String.format("%.1f", temp.getDay()));
+        viewHolder.tvHigh.setText(String.format("%.1f", temp.getMax()) + "˚F");
+        viewHolder.tvLow.setText(String.format("%.1f", temp.getMin()) + "˚F");
         viewHolder.tvHumid.setText(String.valueOf(weatherOverview.getHumidity()) + "%");
 
         StringBuilder sb = new StringBuilder();

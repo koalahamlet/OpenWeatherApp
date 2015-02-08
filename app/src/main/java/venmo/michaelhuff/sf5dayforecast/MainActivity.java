@@ -1,10 +1,11 @@
 package venmo.michaelhuff.sf5dayforecast;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.google.gson.FieldNamingPolicy;
@@ -30,6 +31,10 @@ import venmo.michaelhuff.sf5dayforecast.Models.WeatherOverview;
 public class MainActivity extends ActionBarActivity {
 
     public String TAG = MainActivity.class.getSimpleName();
+    BlankFragment mDashBoardFragment;
+
+    FragmentManager fm;
+    Fragment fragment;
 
     @Inject
     ApiClient apiClient;
@@ -37,16 +42,25 @@ public class MainActivity extends ActionBarActivity {
     @InjectView(R.id.listview)
     ListView listView;
 
+    // for fragment transaction
+   // @InjectView(R.id.container)
+   // FrameLayout mContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // might not need setContentView
         setContentView(R.layout.fragment_main);
 
+        // hide that stuff
+        ActionBar bar = getSupportActionBar();
+        bar.hide();
+
         if (savedInstanceState == null) {
             //TODO: do fragment transaction
             // to inflate fragment_main
-            // with getSupportFragmentManager
+
+//            initMainContentFragment();
         }
 
         //you have to butter your bread
@@ -98,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
                     // if call was not null
                     // get a calendar instance
                     Calendar cal = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE MMM dd,yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd, yyyy");
                     for (int i = 0; i < forecast.size(); i++) {
                         // then add the current date as a string to the array.
                         forecast.get(i).setDate(sdf.format(cal.getTime()));
@@ -120,26 +134,20 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        /* Private Methods */
+
+    private void initMainContentFragment() {
+        fm = getSupportFragmentManager();
+        fragment = fm.findFragmentById(R.id.container);
+        if (fragment == null) {
+            fm.beginTransaction().add(R.id.container, createMainFragment()).commit();
+        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    private Fragment createMainFragment() {
+        Log.d(TAG, "createMainFragment");
+        mDashBoardFragment = new BlankFragment();
+        return mDashBoardFragment;
     }
 
 }
