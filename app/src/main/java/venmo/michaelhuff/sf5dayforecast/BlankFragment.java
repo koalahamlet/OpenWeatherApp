@@ -94,24 +94,19 @@ public class BlankFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-
         //you have to butter your bread
-        ButterKnife.inject(getActivity());
-
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.inject(this, rootView);
         // after the butterknife, comes the dagger
         // Perform injection so that when this call returns all dependencies will be available for use.
         WeatherApplication app = WeatherApplication.get(getActivity());
         app.inject(this);
-
-
-
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return rootView;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-
-        super.onActivityCreated(savedInstanceState);
+    public void onResume() {
+        super.onResume();
         Observer<Response> observer = new Observer<Response>() {
             @Override
             public void onCompleted() {
