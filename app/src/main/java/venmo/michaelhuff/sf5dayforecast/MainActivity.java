@@ -1,5 +1,6 @@
 package venmo.michaelhuff.sf5dayforecast;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -26,6 +28,8 @@ import rx.Observer;
 
 public class MainActivity extends ActionBarActivity {
 
+    Context itsmeeee;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +39,11 @@ public class MainActivity extends ActionBarActivity {
         ButterKnife.inject(this);
 
 
+        itsmeeee = this.getApplicationContext();
         ApiClient apiClient = new ApiClient();
         Observer<Response> observer = new Observer<Response>() {
             @Override public void onCompleted() {
-
+                Toast.makeText(itsmeeee, "you got here", Toast.LENGTH_LONG);
             }
 
             @Override public void onError(Throwable e) {
